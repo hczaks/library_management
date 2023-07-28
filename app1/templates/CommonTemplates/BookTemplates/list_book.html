@@ -1,4 +1,4 @@
-{% extends 'Basic/basic.html' %}
+{% extends 'Basic/CommonBasic.html' %}
 {% block css %}
 {% endblock %}
 
@@ -26,8 +26,8 @@
                 <td>{{ book.price }}</td>
                 <td>
                     <a class="btn btn-primary btn-xs" href="{% url 'borrow_book' book.id %}">借阅</a>
-                    <a class="btn btn-primary btn-xs" href="{% url 'edit_book' book.id %}">编辑</a>
-                    <a class="btn btn-danger btn-xs" href="{% url 'delete_book' book.id %}">删除</a>
+{#                    <a class="btn btn-primary btn-xs" href="{% url 'edit_book' book.id %}">编辑</a>#}
+{#                    <a class="btn btn-danger btn-xs" href="{% url 'delete_book' book.id %}">删除</a>#}
                 </td>
             </tr>
         {% endfor %}

@@ -4,6 +4,11 @@ from app1 import code
 
 
 def image_code(request):
+    """
+    生产验证码
+    :param request:
+    :return:
+    """
     # 调用pillow函数，生成图片
     img, code_string = code.check_code()
 

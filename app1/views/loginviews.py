@@ -44,7 +44,6 @@ def logout(request):
     :param request:
     :return:
     """
-    # 注销
     request.session.clear()
     return redirect('login')
 
@@ -55,7 +54,6 @@ def register(request):
     :param request:
     :return:
     """
-    # 注册用户
     if request.method == 'GET':
         form = BorrowerForm()
         return render(request, 'LoginTemplates/register.html', {'form': form})

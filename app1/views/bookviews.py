@@ -1,7 +1,6 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from app1.form import LoginForm, BorrowerForm, BookForm
-from app1 import models, code
+from app1.form import BookForm
+from app1 import models
 
 
 def book_list(request):
@@ -12,17 +11,21 @@ def book_list(request):
     """
     # 图书列表
     books = models.Book.objects.all()
-    return render(request, 'BookTemplates/list_book.html', {'books': books})
+    return render(request, 'CommonTemplates/BookTemplates/list_book.html', {'books': books})
 
 
 def add_book(request):
-    # 添加图书
+    """
+    添加图书
+    :param request:
+    :return:
+    """
     # if request.session.get("info") != RootUser:
     #     return HttpResponse("无权访问")
 
     if request.method == 'GET':
         form = BookForm()
-        return render(request, 'BookTemplates/add_book.html', {'form': form})
+        return render(request, 'CommonTemplates/BookTemplates/add_book.html', {'form': form})
 
     form = BookForm(request.POST)
     if form.is_valid():
@@ -30,11 +33,16 @@ def add_book(request):
         book.published_date = form.cleaned_data['ctime']
         book.save()
         return redirect('book_list')
-    return render(request, 'BookTemplates/add_book.html', {'form': form})
+    return render(request, 'CommonTemplates/BookTemplates/add_book.html', {'form': form})
 
 
 def edit_book(request, book_id):
-    # 编辑图书
+    """
+    编辑图书
+    :param request:
+    :param book_id: 图书id
+    :return:
+    """
     # if request.session.get("info") != RootUser:
     #     return HttpResponse("无权访问")
 
@@ -49,14 +57,18 @@ def edit_book(request, book_id):
             book.published_date = form.cleaned_data['ctime']
             form.save()
             return redirect('book_list')
-    return render(request, 'BookTemplates/edit_book.html', {'form': form, 'book': book})
+    return render(request, 'CommonTemplates/BookTemplates/edit_book.html', {'form': form, 'book': book})
 
 
 def delete_book(request, book_id):
-    # 删除图书
+    """
+    删除图书
+    :param request:
+    :param book_id: 图书id
+    :return:
+    """
     # if request.session.get("info") != RootUser:
     #     return HttpResponse("无权访问")
-
     book = get_object_or_404(models.Book, pk=book_id)
     book.delete()
     return redirect('book_list')

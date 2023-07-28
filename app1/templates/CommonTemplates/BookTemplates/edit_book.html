@@ -1,11 +1,22 @@
-{% extends 'Basic/basic.html' %}
+{% extends 'Basic/CommonBasic.html' %}
 {% load static %}
 
-{% block css %}
-{% endblock %}
-
-{% block content%}
-    <h1>添加图书</h1>
+{% block content %}
+    <h1>编辑图书</h1>
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        {% if form.errors %}#}
+{#            <ul>#}
+{#            {% for field in form %}#}
+{#                {% for error in field.errors %}#}
+{#                    <li>{{ error }}</li>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#            </ul>#}
+{#        {% endif %}#}
+{#        <button type="submit">保存</button>#}
+{#    </form>#}
     <form method="post" novalidate>
         {% csrf_token %}
         <div class="clearfix">
@@ -23,11 +34,12 @@
                 </div>
             {% endfor %}
             <div class="col-xs-12">
-                <button id="btnAdd" type="submit" class="btn btn-primary">提 交</button>
+                <button id="btnAdd" type="submit" class="btn btn-primary">保 存</button>
             </div>
         </div>
     </form>
 {% endblock %}
+
 {% block js %}
     <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js' %}"></script>
