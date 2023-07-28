@@ -12,7 +12,7 @@ def book_list(request):
     """
     # 图书列表
     books = models.Book.objects.all()
-    return render(request, 'book_list.html', {'books': books})
+    return render(request, 'BookTemplates/list_book.html', {'books': books})
 
 
 def add_book(request):
@@ -22,7 +22,7 @@ def add_book(request):
 
     if request.method == 'GET':
         form = BookForm()
-        return render(request, 'add_book.html', {'form': form})
+        return render(request, 'BookTemplates/add_book.html', {'form': form})
 
     form = BookForm(request.POST)
     if form.is_valid():
@@ -30,7 +30,7 @@ def add_book(request):
         book.published_date = form.cleaned_data['ctime']
         book.save()
         return redirect('book_list')
-    return render(request, 'add_book.html', {'form': form})
+    return render(request, 'BookTemplates/add_book.html', {'form': form})
 
 
 def edit_book(request, book_id):
@@ -49,7 +49,7 @@ def edit_book(request, book_id):
             book.published_date = form.cleaned_data['ctime']
             form.save()
             return redirect('book_list')
-    return render(request, 'edit_book.html', {'form': form, 'book': book})
+    return render(request, 'BookTemplates/edit_book.html', {'form': form, 'book': book})
 
 
 def delete_book(request, book_id):

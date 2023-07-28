@@ -23,7 +23,7 @@ def login(request):
             code = request.session.get('image_code', "")
             if user_input_code.upper() != code.upper():
                 form.add_error("code", "验证码错误")
-                return render(request, 'login.html', {'form': form})
+                return render(request, 'LoginTemplates/login.html', {'form': form})
 
             for obj in models.Borrower.objects.all():
                 if {username, password} == {obj.username, obj.password}:
@@ -35,7 +35,7 @@ def login(request):
 
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'LoginTemplates/login.html', {'form': form})
 
 
 def logout(request):
@@ -58,12 +58,12 @@ def register(request):
     # 注册用户
     if request.method == 'GET':
         form = BorrowerForm()
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'LoginTemplates/register.html', {'form': form})
     form = BorrowerForm(request.POST)
     if form.is_valid():
         form.save()
         return redirect('login')
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'LoginTemplates/register.html', {'form': form})
 
 
 
