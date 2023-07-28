@@ -8,7 +8,11 @@ RootUser = "1234567"
 
 
 def login(request):
-    # 登录视图
+    """
+    登录视图
+    :param request:
+    :return:
+    """
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid():
@@ -35,12 +39,22 @@ def login(request):
 
 
 def logout(request):
+    """
+    注销视图
+    :param request:
+    :return:
+    """
     # 注销
     request.session.clear()
     return redirect('login')
 
 
 def register(request):
+    """
+    注销
+    :param request:
+    :return:
+    """
     # 注册用户
     if request.method == 'GET':
         form = BorrowerForm()
@@ -53,6 +67,11 @@ def register(request):
 
 
 def book_list(request):
+    """
+    图书列表
+    :param request:
+    :return:
+    """
     # 图书列表
     books = models.Book.objects.all()
     return render(request, 'book_list.html', {'books': books})
