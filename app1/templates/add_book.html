@@ -1,0 +1,44 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block content%}
+    <h1>添加图书</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="clearfix">
+            {% for field in form %}
+                <div class="col-xs-6">
+                    <div class="form-group" style="position: relative;margin-bottom: 20px;">
+                        <label>{{ field.label }}</label>
+                        {% if field.name == 'ctime' %}
+                            <input id="dt" type="text" class="form-control" placeholder="入库时间" name="ctime" value="{{ field.value }}">
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                        <span style="color: red">{{ field.errors.0 }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col-xs-12">
+                <button id="btnAdd" type="submit" class="btn btn-primary">提 交</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('#dt').datepicker({
+                format: 'yyyy-mm-dd',
+                startDate: '0',
+                language: "zh-CN",
+                autoclose: true
+            });
+        })
+    </script>
+{% endblock %}
