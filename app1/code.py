@@ -21,7 +21,7 @@ def check_code(width=120, height=30, char_length=5, font_file='Monaco.ttf', font
         生成随机颜色
         :return:
         """
-        return (random.randint(0, 255), random.randint(10, 255), random.randint(64, 255))
+        return random.randint(0, 255), random.randint(10, 255), random.randint(64, 255)
 
     # 写文字
     font = ImageFont.truetype(font_file, font_size)

@@ -74,3 +74,9 @@ class BorrowingForm(BootStrapModelForm):
         widgets = {
             'borrowed_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+class AdminForm(BootStrapModelForm):
+    class Meta:
+        model = models.Admin
+        fields = "__all__"

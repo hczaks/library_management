@@ -1,0 +1,15 @@
+{% extends 'Basic/AdminBasic.html' %}
+{% block content %}
+    <h2>归还图书</h2>
+    <p>书名：{{ borrowing.book.title }}</p>
+    <p>借阅人：{{ borrowing.borrower.name }}</p>
+    <p>借阅时间：{{ borrowing.borrowed_date }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <p>书名: {{ borrowing.book.title }}</p>
+        <p>借阅账号: {{ borrowing.borrower.username }}</p>
+        <p>归还时间: {{ borrowing.borrowed_date }}</p>
+        <br>
+        <input type="submit" value="Return">
+    </form>
+{% endblock %}

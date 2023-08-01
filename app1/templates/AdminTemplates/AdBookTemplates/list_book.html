@@ -1,0 +1,37 @@
+{% extends 'Basic/AdminBasic.html' %}
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>图书列表</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>入库时间</th>
+                <th>价格</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.number }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.published_date }}</td>
+                <td>{{ book.price }}</td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="{% url 'borrow_book' book.id %}">借阅</a>
+                    <a class="btn btn-primary btn-xs" href="{% url 'admin_edit_book' book.id %}">编辑</a>
+                    <a class="btn btn-danger btn-xs" href="{% url 'admin_delete_book' book.id %}">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

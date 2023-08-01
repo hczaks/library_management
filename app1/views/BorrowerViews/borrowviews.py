@@ -10,7 +10,10 @@ def borrowing_list(request):
     :return:
     """
     current_borrower_username = request.session.get('info')
-    borrower = models.Borrower.objects.get(username=current_borrower_username)
+    try:
+        borrower = models.Borrower.objects.get(username=current_borrower_username)
+    except models.Borrower.DoesNotExist:
+        borrower = None
     borrowings = models.Borrowing.objects.filter(borrower=borrower)
     return render(request, 'CommonTemplates/BorrowTemplates/borrow_list.html', {'borrowings': borrowings})
 

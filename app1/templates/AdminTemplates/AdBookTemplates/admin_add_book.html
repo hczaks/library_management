@@ -1,4 +1,4 @@
-{% extends 'Basic/CommonBasic.html' %}
+{% extends 'Basic/AdminBasic.html' %}
 {% load static %}
 
 {% block css %}
@@ -15,7 +15,7 @@
                         <label>{{ field.label }}</label>
                         {% if field.name == 'ctime' %}
 {#                            <input id="dt" type="text" class="form-control" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">#}
-                            <input id="dt" type="date" class="form-control" title="请选择日期" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">
+                            <input id="dt" type="date" class="form-control" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">
                         {% else %}
                             {{ field }}
                         {% endif %}

@@ -1,0 +1,13 @@
+{% extends 'Basic/AdminBasic.html' %}
+{% block content %}
+{% for borrowing in borrowings %}
+    <p>书名: {{ borrowing.book }}</p>
+    <p>借阅人: {{ borrowing.borrower }}</p>
+    <p>借阅时间: {{ borrowing.borrowed_date }}</p>
+    <p>归还时间: {{ borrowing.returned_date }}</p>
+    {% if borrowing.returned_date is null %}
+        <a class="btn btn-primary btn-xs" href="{% url 'return_book' borrowing.id %}">归还</a>
+    {% endif %}
+    <hr>
+{% endfor %}
+{% endblock %}

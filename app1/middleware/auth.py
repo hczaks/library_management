@@ -1,5 +1,5 @@
 from django.utils.deprecation import MiddlewareMixin
-from django.shortcuts import HttpResponse, redirect
+from django.shortcuts import redirect
 
 
 class AuthMiddleware(MiddlewareMixin):
@@ -7,7 +7,7 @@ class AuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
         # 排除那些不需要登录就能访问的页面
         # request.path_info 获取当前用户请求的URL /login/
-        if request.path_info in ["/", "/register/", '/image/code/']:
+        if request.path_info in ["/", "/register/", '/image/code/', '/admin/login/']:
             return
 
         # 读取当前访问的用户的session信息，如果能读到，说明已登陆过，就可以继续向后走。

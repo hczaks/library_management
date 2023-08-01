@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Book(models.Model):
+    """
+    图书model
+    """
     title = models.CharField(verbose_name='书名', max_length=50)
     author = models.CharField(verbose_name='作者', max_length=50)
     published_date = models.DateField(verbose_name='入库时间')
@@ -13,6 +16,9 @@ class Book(models.Model):
 
 
 class Borrower(models.Model):
+    """
+    借阅人model
+    """
     name = models.CharField(verbose_name='名字', max_length=100)
     student_id = models.CharField(verbose_name='学号', max_length=8)
     college_choice = (
@@ -34,6 +40,9 @@ class Borrower(models.Model):
 
 
 class Borrowing(models.Model):
+    """
+    借阅关系model
+    """
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='书名')
     borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, verbose_name='借阅人')
     borrowed_date = models.DateField(verbose_name='借阅时间')
@@ -41,4 +50,10 @@ class Borrowing(models.Model):
 
     def __str__(self):
         return str(self.borrower.name)
+
+
+class Admin(models.Model):
+    name = models.CharField(verbose_name='名称', max_length=16)
+    username = models.CharField(verbose_name='账号', max_length=12)
+    password = models.CharField(verbose_name='密码', max_length=12)
 

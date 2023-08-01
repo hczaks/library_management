@@ -1,10 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from app1.form import LoginForm, BorrowerForm, BookForm
-from app1 import models, code
-from datetime import date
-from io import BytesIO
-
-RootUser = "1234567"
+from django.shortcuts import render, redirect
+from app1.form import LoginForm, BorrowerForm
+from app1 import models
 
 
 def login(request):
@@ -13,7 +9,10 @@ def login(request):
     :param request:
     :return:
     """
+    global bl
+    bl = False
     if request.method == 'POST':
+
         form = LoginForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -25,16 +24,28 @@ def login(request):
                 form.add_error("code", "验证码错误")
                 return render(request, 'LoginTemplates/login.html', {'form': form})
 
-            for obj in models.Borrower.objects.all():
-                if {username, password} == {obj.username, obj.password}:
-                    request.session["info"] = username
-                    # session可以保存7天
-                    request.session.set_expiry(60 * 60 * 24 * 7)
-                    return redirect('book_list')
+            current_url = request.build_absolute_uri()
+            if current_url == "http://127.0.0.1:8000/admin/login/":
+                bl = True
+            print(bl)
+            if bl:
+                for obj in models.Admin.objects.all():
+                    if {username, password} == {obj.username, obj.password}:
+                        request.session["info"] = username
+                        # session可以保存7天
+                        request.session.set_expiry(60 * 60 * 24 * 7)
+                        print("_______________")
+                        return redirect('admin_book_list')
+            else:
+                for obj in models.Borrower.objects.all():
+                    if {username, password} == {obj.username, obj.password}:
+                        request.session["info"] = username
+                        # session可以保存7天
+                        request.session.set_expiry(60 * 60 * 24 * 7)
+                        return redirect('book_list')
             form.add_error("password", "用户名或者密码错误")
 
-    else:
-        form = LoginForm()
+    form = LoginForm()
     return render(request, 'LoginTemplates/login.html', {'form': form})
 
 
@@ -50,7 +61,7 @@ def logout(request):
 
 def register(request):
     """
-    注销
+    注册账号
     :param request:
     :return:
     """
@@ -62,10 +73,4 @@ def register(request):
         form.save()
         return redirect('login')
     return render(request, 'LoginTemplates/register.html', {'form': form})
-
-
-
-
-
-
 
