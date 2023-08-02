@@ -14,8 +14,9 @@
                     <div class="form-group" style="position: relative;margin-bottom: 20px;">
                         <label>{{ field.label }}</label>
                         {% if field.name == 'ctime' %}
-{#                            <input id="dt" type="text" class="form-control" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">#}
-                            <input id="dt" type="date" class="form-control" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">
+
+                            <input id="dt" type="text" class="form-control" placeholder="入库时间" name="ctime" value="{{ field.value }}">
+{#                            <input id="dt" type="date" class="form-control" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">#}
                         {% else %}
                             {{ field }}
                         {% endif %}
@@ -32,14 +33,14 @@
 {% block js %}
     <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js' %}"></script>
-{#    <script>#}
-{#        $(function () {#}
-{#            $('#dt').datepicker({#}
-{#                format: 'yyyy-mm-dd',#}
-{#                startDate: '0',#}
-{#                language: "zh-CN",#}
-{#                autoclose: true,#}
-{#            });#}
-{#        })#}
-{#    </script>#}
+    <script>
+        $(function () {
+            $('#dt').datepicker({
+                format: 'yyyy-mm-dd',
+                startDate: '0',
+                language: "zh-CN",
+                autoclose: true,
+            });
+        })
+    </script>
 {% endblock %}

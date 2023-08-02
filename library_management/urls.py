@@ -17,28 +17,32 @@ from django.contrib import admin
 from django.urls import path
 from app1.views import captcha, loginviews
 from app1.views.BorrowerViews import bookviews, borrowviews
-from app1.views.AdminViews import admin_bookviews
+from app1.views.AdminViews import admin_bookviews, admin_borrowviews
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', loginviews.login, name='login'),
-    path('logout', loginviews.logout, name='logout'),
+    path('logout/', loginviews.logout, name='logout'),
     path('register/', loginviews.register, name='register'),
     path('admin/login/', loginviews.login, name='admin_login'),
 
+    # 验证码
+    path('image/code/', captcha.image_code, name='image_code'),
 
+
+    # 普通用户url
     path('books/', bookviews.book_list, name='book_list'),
-
-    path('admin/books/', admin_bookviews.admin_book_list, name='admin_book_list'),
-    path('admin/books/add/', admin_bookviews.admin_add_book, name='admin_add_book'),
-    path('admin/books/delete/<int:book_id>/', admin_bookviews.admin_delete_book, name='admin_delete_book'),
-    path('admin/books/edit/<int:book_id>/', admin_bookviews.admin_edit_book, name='admin_edit_book'),
-
-
     path('books/borrow/<int:book_id>', borrowviews.borrow_book, name='borrow_book'),
     path('books/return/<int:borrowing_id>', borrowviews.return_book, name='return_book'),
     path('borrow/', borrowviews.borrowing_list, name='borrowing_list'),
 
 
-    path('image/code/', captcha.image_code, name='image_code')
+    # 管理员url
+    path('admin/books/', admin_bookviews.admin_book_list, name='admin_book_list'),
+    path('admin/books/add/', admin_bookviews.admin_add_book, name='admin_add_book'),
+    path('admin/books/delete/<int:book_id>/', admin_bookviews.admin_delete_book, name='admin_delete_book'),
+    path('admin/books/edit/<int:book_id>/', admin_bookviews.admin_edit_book, name='admin_edit_book'),
+    path('admin/borrow/', admin_borrowviews.borrowing_list, name='admin_borrowing_list'),
+
+
 ]
