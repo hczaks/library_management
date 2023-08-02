@@ -11,7 +11,7 @@ def book_list(request):
     """
     # 图书列表
     books = models.Book.objects.all()
-    return render(request, 'CommonTemplates/BookTemplates/list_book.html', {'books': books})
+    return render(request, 'CommonTemplates/BookTemplates/com_list_book.html', {'books': books})
 
 
 

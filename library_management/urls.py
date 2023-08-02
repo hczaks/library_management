@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1.views import captcha, loginviews
-from app1.views.BorrowerViews import bookviews, borrowviews
+from app1.views.BorrowerViews import com_bookviews, com_borrowviews
 from app1.views.AdminViews import admin_bookviews, admin_borrowviews
 
 urlpatterns = [
@@ -31,10 +31,10 @@ urlpatterns = [
 
 
     # 普通用户url
-    path('books/', bookviews.book_list, name='book_list'),
-    path('books/borrow/<int:book_id>', borrowviews.borrow_book, name='borrow_book'),
-    path('books/return/<int:borrowing_id>', borrowviews.return_book, name='return_book'),
-    path('borrow/', borrowviews.borrowing_list, name='borrowing_list'),
+    path('books/', com_bookviews.book_list, name='book_list'),
+    path('books/borrow/<int:book_id>', com_borrowviews.borrow_book, name='borrow_book'),
+    path('books/return/<int:borrowing_id>', com_borrowviews.return_book, name='return_book'),
+    path('borrow/', com_borrowviews.borrowing_list, name='borrowing_list'),
 
 
     # 管理员url

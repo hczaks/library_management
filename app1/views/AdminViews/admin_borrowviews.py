@@ -15,7 +15,7 @@ def borrowing_list(request):
     except models.Borrower.DoesNotExist:
         borrower = None
     borrowings = models.Borrowing.objects.filter(borrower=borrower)
-    return render(request, 'AdminTemplates/AdBorrowTemplates/borrow_list.html', {'borrowings': borrowings})
+    return render(request, 'AdminTemplates/AdBorrowTemplates/admin_borrow_list.html', {'borrowings': borrowings})
 
 
 def borrow_book(request, book_id):
@@ -34,13 +34,13 @@ def borrow_book(request, book_id):
         borrower, created = models.Borrower.objects.get_or_create(username=borrower_username)
         if request.session.get('info') != borrower_username:
             error_message = "输入的用户名与当前借阅人不匹配。"
-            return render(request, 'AdminTemplates/AdBorrowTemplates/borrow_book.html', {'book': book, 'error_message': error_message})
+            return render(request, 'AdminTemplates/AdBorrowTemplates/admin_borrow_book.html', {'book': book, 'error_message': error_message})
 
         borrowing = models.Borrowing.objects.create(book=book, borrower=borrower, borrowed_date=borrowed_date)
         borrowing.save()
         return redirect('book_list')
 
-    return render(request, 'AdminTemplates/AdBorrowTemplates/borrow_book.html', {'book': book})
+    return render(request, 'AdminTemplates/AdBorrowTemplates/admin_borrow_book.html', {'book': book})
 
 
 def return_book(request, borrowing_id):
@@ -64,4 +64,4 @@ def return_book(request, borrowing_id):
     else:
         return redirect('book_list')
 
-    return render(request, 'AdminTemplates/AdBorrowTemplates/return_book.html', {'borrowing': borrowing})
+    return render(request, 'AdminTemplates/AdBorrowTemplates/admin_return_book.html', {'borrowing': borrowing})

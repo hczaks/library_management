@@ -11,7 +11,7 @@ def admin_book_list(request):
     """
     # 图书列表
     books = models.Book.objects.all()
-    return render(request, 'AdminTemplates/AdBookTemplates/list_book.html', {'books': books})
+    return render(request, 'AdminTemplates/AdBookTemplates/admin_list_book.html', {'books': books})
 
 
 def admin_add_book(request):
