@@ -22,7 +22,7 @@
                 <td>{{ book.number }}</td>
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
-                <td>{{ book.published_date }}</td>
+                <td>{{ book.published_date|date:"Y-m-d" }}</td>
                 <td>{{ book.price }}</td>
                 <td>
                     <a class="btn btn-primary btn-xs" href="{% url 'borrow_book' book.id %}">借阅</a>
