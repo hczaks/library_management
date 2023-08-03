@@ -13,6 +13,7 @@
                 <th>作者</th>
                 <th>入库时间</th>
                 <th>价格</th>
+                <th>借阅次数</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -24,10 +25,11 @@
                 <td>{{ book.author }}</td>
                 <td>{{ book.published_date|date:"Y-m-d" }}</td>
                 <td>{{ book.price }}</td>
+                <th>{{ book.account }}</th>
                 <td>
                     <a class="btn btn-primary btn-xs" href="{% url 'borrow_book' book.id %}">借阅</a>
-                    <a class="btn btn-primary btn-xs" href="{% url 'admin_edit_book' book.id %}">编辑</a>
-                    <a class="btn btn-danger btn-xs" href="{% url 'admin_delete_book' book.id %}">删除</a>
+                    <a class="btn btn-primary btn-xs" href="{% url 'edit_book' book.id %}">编辑</a>
+                    <a class="btn btn-danger btn-xs" href="{% url 'delete_book' book.id %}">删除</a>
                 </td>
             </tr>
         {% endfor %}

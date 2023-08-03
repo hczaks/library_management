@@ -16,8 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1.views import captcha, loginviews
-from app1.views.BorrowerViews import com_bookviews, com_borrowviews
-from app1.views.AdminViews import admin_bookviews, admin_borrowviews
+from app1.views.BorrowerViews import bookviews, borrowviews
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -31,18 +30,18 @@ urlpatterns = [
 
 
     # 普通用户url
-    path('books/', com_bookviews.book_list, name='book_list'),
-    path('books/borrow/<int:book_id>', com_borrowviews.borrow_book, name='borrow_book'),
-    path('books/return/<int:borrowing_id>', com_borrowviews.return_book, name='return_book'),
-    path('borrow/', com_borrowviews.borrowing_list, name='borrowing_list'),
-
-
-    # 管理员url
-    path('admin/books/', admin_bookviews.admin_book_list, name='admin_book_list'),
-    path('admin/books/add/', admin_bookviews.admin_add_book, name='admin_add_book'),
-    path('admin/books/delete/<int:book_id>/', admin_bookviews.admin_delete_book, name='admin_delete_book'),
-    path('admin/books/edit/<int:book_id>/', admin_bookviews.admin_edit_book, name='admin_edit_book'),
-    path('admin/borrow/', admin_borrowviews.borrowing_list, name='admin_borrowing_list'),
+    path('books/', bookviews.book_list, name='book_list'),
+    path('books/borrow/<int:book_id>', borrowviews.borrow_book, name='borrow_book'),
+    path('books/return/<int:borrowing_id>', borrowviews.return_book, name='return_book'),
+    path('borrow/', borrowviews.borrowing_list, name='borrowing_list'),
+    path('books/add/', bookviews.admin_add_book, name='add_book'),
+    path('books/delete/<int:book_id>/', bookviews.admin_delete_book, name='delete_book'),
+    path('books/edit/<int:book_id>/', bookviews.admin_edit_book, name='edit_book'),
+    #
+    # # 管理员url
+    # path('admin/books/', admin_bookviews.admin_book_list, name='admin_book_list'),
+    #
+    # path('admin/borrow/', admin_borrowviews.borrowing_list, name='admin_borrowing_list'),
 
 
 ]

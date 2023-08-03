@@ -9,10 +9,7 @@ def login(request):
     :param request:
     :return:
     """
-    global bl
-    bl = False
     if request.method == 'POST':
-
         form = LoginForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -25,18 +22,21 @@ def login(request):
                 return render(request, 'LoginTemplates/login.html', {'form': form})
 
             current_url = request.build_absolute_uri()
+            # 管理员用户登录
             if current_url == "http://127.0.0.1:8000/admin/login/":
-                bl = True
-            print(bl)
-            if bl:
+                request.session["user"] = "admin"
+                print("1")
                 for obj in models.Admin.objects.all():
+                    print("2")
                     if {username, password} == {obj.username, obj.password}:
                         request.session["info"] = username
                         # session可以保存7天
                         request.session.set_expiry(60 * 60 * 24 * 7)
-                        print("_______________")
-                        return redirect('admin_book_list')
-            else:
+                        return redirect('book_list')
+            # 普通用户登录
+            elif current_url == "http://127.0.0.1:8000/":
+
+                request.session["user"] = "common"
                 for obj in models.Borrower.objects.all():
                     if {username, password} == {obj.username, obj.password}:
                         request.session["info"] = username
@@ -44,8 +44,8 @@ def login(request):
                         request.session.set_expiry(60 * 60 * 24 * 7)
                         return redirect('book_list')
             form.add_error("password", "用户名或者密码错误")
-
-    form = LoginForm()
+    else:
+        form = LoginForm()
     return render(request, 'LoginTemplates/login.html', {'form': form})
 
 
