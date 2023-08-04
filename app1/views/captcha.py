@@ -11,7 +11,6 @@ def image_code(request):
     """
     # 调用pillow函数，生成图片
     img, code_string = code.check_code()
-
     # 写入到session中
     request.session['image_code'] = code_string
     # 给Session设置60s超时
