@@ -19,7 +19,6 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-
             user_input_code = form.cleaned_data.pop('code')
             code = request.session.get('image_code', "")
             if user_input_code.upper() != code.upper():
@@ -30,9 +29,7 @@ def login(request):
             # 管理员用户登录
             if current_url == "http://127.0.0.1:8000/admin/login/":
                 request.session["user"] = "admin"
-                print("1")
                 for obj in models.Admin.objects.all():
-                    print("2")
                     if {username, password} == {obj.username, obj.password}:
                         request.session["info"] = username
                         # session可以保存7天
@@ -78,4 +75,3 @@ def register(request):
         form.save()
         return redirect('login')
     return render(request, 'LoginTemplates/register.html', {'form': form})
-
