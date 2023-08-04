@@ -1,0 +1,9 @@
+{% extends 'Basic/CommonBasic.html' %}
+{% block content %}
+{% for obj in user %}
+    <p>{{ obj.name }}</p>
+    <p>{{ obj.student_id }}</p>
+    <p>{{ obj.get_college_display }}</p>
+    <p>{{ obj.get_gender_display }}</p>
+{% endfor %}
+{% endblock %}
