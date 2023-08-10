@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from app1.form import LoginForm, BorrowerForm
+from app1.utile.form import LoginForm, BorrowerForm
 from app1 import models
 
 

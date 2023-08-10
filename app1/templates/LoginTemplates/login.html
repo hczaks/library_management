@@ -13,7 +13,7 @@
             {##27ae60, #2980b9, #e74c3c, #8e44ad);#}
             {#background-size: 400%;#}
             {#animation: bgmove 20s infinite;#}
-        {#}#}
+{#        }#}
         @keyframes bgmove {
             0%{
                 background-position: 0% 50%;
@@ -66,7 +66,7 @@
                     <div style="color: red;">{{ form.code.errors.0 }}</div>
                 </div>
                 <div class="col-xs-5">
-                    <a href="{% url 'login' %}"><img id="image_code" src="{% url 'image_code' %}" style="width: 125px;"></a>
+                    <a href="#" id="refresh_image_code"><img id="image_code" src="{% url 'image_code' %}" style="width: 125px;"></a>
                 </div>
             </div>
         </div>
@@ -82,4 +82,17 @@
 </div>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var refreshLink = document.getElementById('refresh_image_code');
+        var imageCode = document.getElementById('image_code');
+        var codeInput = document.getElementById('{{ form.code.id_for_label }}');
+
+        refreshLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            imageCode.src = "{% url 'image_code' %}?" + new Date().getTime();
+            codeInput.value = '';
+        });
+    });
+</script>
 </html>

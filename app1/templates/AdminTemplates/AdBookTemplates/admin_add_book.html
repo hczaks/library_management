@@ -14,9 +14,7 @@
                     <div class="form-group" style="position: relative;margin-bottom: 20px;">
                         <label>{{ field.label }}</label>
                         {% if field.name == 'ctime' %}
-
                             <input id="dt" type="text" class="form-control" placeholder="入库时间" name="ctime" value="{{ field.value }}">
-{#                            <input id="dt" type="date" class="form-control" placeholder="{{ field.value }}" name="ctime" value="{{ field.value }}">#}
                         {% else %}
                             {{ field }}
                         {% endif %}

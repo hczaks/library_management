@@ -16,7 +16,6 @@ def borrowing_list(request):
         except models.Borrower.DoesNotExist:
             borrower = None
         borrowings = models.AdminBorrowing.objects.filter(borrower=borrower)
-        print(borrowings)
         return render(request, 'AdminTemplates/AdBorrowTemplates/admin_borrow_list.html', {'borrowings': borrowings})
 
     current_borrower_username = request.session.get('info')
@@ -25,7 +24,6 @@ def borrowing_list(request):
     except models.Borrower.DoesNotExist:
         borrower = None
     borrowings = models.ComBorrowing.objects.filter(borrower=borrower)
-    print(borrowings)
     return render(request, 'CommonTemplates/BorrowTemplates/com_borrow_list.html', {'borrowings': borrowings})
 
 

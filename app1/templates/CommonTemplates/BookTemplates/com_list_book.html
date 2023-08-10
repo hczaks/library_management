@@ -33,5 +33,13 @@
         {% endfor %}
         </tbody>
     </table>
+        {% for obj in queryset %}
+            {{ obj.xx }}
+        {% endfor %}
+
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+
     </div>
 {% endblock %}

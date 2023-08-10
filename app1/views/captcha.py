@@ -1,6 +1,6 @@
 from io import BytesIO
 from django.http import HttpResponse
-from app1 import code
+from app1.utile import code
 
 
 def image_code(request):

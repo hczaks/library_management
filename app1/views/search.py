@@ -9,6 +9,7 @@ def search(request):
     :param request:
     :return:
     """
+    books = None
     if request.method == 'POST':
         query = request.POST.get('search')
         books = Book.objects.filter(title__icontains=query) | \
