@@ -1,9 +1,39 @@
 {% extends 'Basic/CommonBasic.html' %}
+
+{% block Title %}
+    <Title>个人信息</Title>
+{% endblock %}
+
+{% block css %}
+    <style>
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 150px;
+        }
+
+        .custom-list {
+            width: 300px; /* Adjust the width as needed */
+
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-{% for obj in user %}
-    <p>{{ obj.name }}</p>
-    <p>{{ obj.student_id }}</p>
-    <p>{{ obj.get_college_display }}</p>
-    <p>{{ obj.get_gender_display }}</p>
-{% endfor %}
+
+    <div class="centered-container">
+        <div class="custom-list">
+            {% for obj in user %}
+
+                <ul class="list-group" style="text-align: center">
+                    <li class="list-group-item">个人信息</li>
+                    <li class="list-group-item">{{ obj.name }}</li>
+                    <li class="list-group-item">{{ obj.student_id }}</li>
+                    <li class="list-group-item">{{ obj.get_college_display }}</li>
+                    <li class="list-group-item">{{ obj.get_gender_display }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

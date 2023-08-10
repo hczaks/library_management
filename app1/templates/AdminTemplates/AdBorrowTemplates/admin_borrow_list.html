@@ -1,4 +1,9 @@
 {% extends 'Basic/AdminBasic.html' %}
+
+{% block Title %}
+    <Title>借阅列表</Title>
+{% endblock %}
+
 {% block content %}
 {% for borrowing in borrowings %}
     <p>书名: {{ borrowing.book }}</p>
