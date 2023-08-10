@@ -1,16 +1,23 @@
 {% extends 'Basic/CommonBasic.html' %}
-{% block css %}
-{% endblock %}
-
 {% block Title %}
     <Title>图书列表</Title>
 {% endblock %}
 
+{% block css %}
+    <style>
+        .list-style{
+            padding: 10px 20px 0 20px;
+            width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <div>
-        <h1>图书列表</h1>
-    <table class="table table-bordered">
-        <thead>
+    <div class="list-style">
+        <h1 style="text-align: center;margin-bottom: 30px">图书列表</h1>
+        <table class="table table-bordered">
+            <thead>
             <tr>
                 <th>编号</th>
                 <th>书名</th>
@@ -20,30 +27,26 @@
                 <th>借阅次数</th>
                 <th>操作</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.number }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.published_date|date:"Y-m-d" }}</td>
-                <td>{{ book.price }}</td>
-                <td>{{ book.account }}</td>
-                <td>
-                    <a class="btn btn-primary btn-xs" href="{% url 'borrow_book' book.id %}">借阅</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-        {% for obj in queryset %}
-            {{ obj.xx }}
-        {% endfor %}
-
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.number }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.published_date|date:"Y-m-d" }}</td>
+                    <td>{{ book.price }}</td>
+                    <td>{{ book.account }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="{% url 'borrow_book' book.id %}">借阅</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         <ul class="pagination">
             {{ page_string }}
         </ul>
-
     </div>
+
 {% endblock %}

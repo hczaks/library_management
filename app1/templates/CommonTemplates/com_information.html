@@ -13,8 +13,7 @@
         }
 
         .custom-list {
-            width: 300px; /* Adjust the width as needed */
-
+            width: 300px;
         }
     </style>
 {% endblock %}
@@ -32,6 +31,7 @@
                     <li class="list-group-item">{{ obj.get_college_display }}</li>
                     <li class="list-group-item">{{ obj.get_gender_display }}</li>
                 </ul>
+
             {% endfor %}
         </div>
     </div>

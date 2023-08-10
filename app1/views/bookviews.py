@@ -13,15 +13,16 @@ def book_list(request):
     # 图书列表
 
     books = models.Book.objects.all()
-    # page_object = Pagination(request, books)
-    # context = {
-    #     "queryset": page_object.page_queryset,
-    #     "page_string": page_object.html()
-    # }
-
+    page_object = Pagination(request, books)
+    page_string = page_object.html()
     if request.session["user"] == "admin":
         return render(request, 'AdminTemplates/AdBookTemplates/admin_list_book.html', {'books': books})
-    return render(request, 'CommonTemplates/BookTemplates/com_list_book.html', {'books': books})
+
+    context = {
+        'books': books,
+        'page_string': page_string,
+    }
+    return render(request, 'CommonTemplates/BookTemplates/com_list_book.html', context)
 
 
 def admin_add_book(request):

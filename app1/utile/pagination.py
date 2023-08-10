@@ -28,7 +28,6 @@
 
 """
 
-import copy
 from django.utils.safestring import mark_safe
 
 
@@ -42,7 +41,7 @@ class Pagination(object):
         :param page_param: 在URL中传递的获取分页的参数，例如：/etty/list/?page=12
         :param plus: 显示当前页的 前或后几页（页码）
         """
-
+        import copy
         query_dict = copy.deepcopy(request.GET)
         query_dict._mutable = True
         self.query_dict = query_dict
@@ -65,10 +64,8 @@ class Pagination(object):
 
         total_count = queryset.count()
         total_page_count, div = divmod(total_count, page_size)
-
         if div:
             total_page_count += 1
-
         self.total_page_count = total_page_count
         self.plus = plus
 
@@ -78,7 +75,6 @@ class Pagination(object):
             # 数据库中的数据比较少，都没有达到11页。
             start_page = 1
             end_page = self.total_page_count
-
         else:
             # 数据库中的数据比较多 > 11页。
 
@@ -106,7 +102,6 @@ class Pagination(object):
         if self.page > 1:
             self.query_dict.setlist(self.page_param, [self.page - 1])
             prev = '<li><a href="?{}">上一页</a></li>'.format(self.query_dict.urlencode())
-
         else:
             self.query_dict.setlist(self.page_param, [1])
             prev = '<li><a href="?{}">上一页</a></li>'.format(self.query_dict.urlencode())
