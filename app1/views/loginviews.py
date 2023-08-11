@@ -36,7 +36,7 @@ def login(request):
                         request.session.set_expiry(60 * 60 * 24 * 7)
                         return redirect('book_list')
             # 普通用户登录
-            elif current_url == "http://127.0.0.1:8000/":
+            else:
                 request.session["user"] = "common"
                 for obj in models.Borrower.objects.all():
                     if {username, password} == {obj.username, obj.password}:
